@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Aviso de Privacidad"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="415dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nos comprometemos a mantener esa confianza. Para esto, comenzaremos por ayudarlo a comprender nuestras prácticas de privacidad.
+                En este aviso se describen los datos personales que recopilamos, cómo los usamos y compartimos, y sus opciones con respecto a ellos.
+                Recomendamos que lea el aviso junto con nuestra descripción general de la privacidad, que destaca los puntos clave sobre nuestras prácticas en esta área.
+                Alcance  Este aviso se aplica a todos los usuarios de los servicios de Uber en cualquier parte del mundo, incluidos los que usan las apps, sitios web, funciones u otros servicios.
+                Este aviso describe cómo Uber y sus afiliados recopilan y usan los datos personales.
+                También se aplica a todos los usuarios de nuestras apps, sitios web, funciones y otros servicios en cualquier lugar del mundo, a menos que estén cubiertos por otra política, como el Aviso de privacidad de Uber Freight o la Política de privacidad de Careem.
+                Se aplica específicamente a las siguientes partes:  Usuarios: personas que piden viajes o que se transportan, incluidos quienes reciben los servicios programados por un tercero.
+                Clientes: personas que piden o que reciben comida u otros productos y servicios.
+                Socios repartidores: personas que prestan servicios de entrega a domicilio.
+                Este aviso también rige otras recopilaciones de datos personales de Uber con relación a sus servicios. P. ej., podemos recopilar información de contacto de las personas que usan las cuentas de clientes de Uber para Empresas o de propietarios o empleados de restaurantes u otros comercios, datos personales de aquellos que inician solicitudes para ser socios conductores o socios repartidores (aunque no las completen) u otra información personal relacionada con nuestras funciones y tecnología de mapeo.
+                Se hará referencia a todas las personas sujetas a este aviso como “usuarios”.
+                Además, tenga en cuenta lo siguiente:
+                Para los usuarios en México: Consulte aquí para obtener información sobre las prácticas de privacidad de Uber previstas en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares de México" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnRegresar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="regresar" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
