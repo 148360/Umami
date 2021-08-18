@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_add_dish.xml" value="0.3875" />
+        <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_dishes.xml" value="0.3804347826086957" />
+        <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_principal.xml" value="0.3875" />
+        <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_suggestions.xml" value="0.3804347826086957" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HolaMundo">
-        <activity android:name=".SucursalActivity"></activity>
+        <activity
+            android:name=".SuggestionsActivity"
+            android:exported="true" />
+        <activity android:name=".SucursalActivity" />
         <activity android:name=".DishesActivity" />
         <activity android:name=".AddDishActivity" />
         <activity android:name=".PrincipalActivity" />

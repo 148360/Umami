@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,8 +14,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.holamundo.adapters.DishAdapter;
-import com.example.holamundo.models.Category;
 import com.example.holamundo.models.Dish;
+import com.example.holamundo.models.Url;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,40 +23,31 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.holamundo.MainActivity.EXTRA_URL;
-
-public class DishesActivity extends AppCompatActivity implements DishAdapter.OnItemClickListener {
+public class SuggestionsActivity extends AppCompatActivity implements DishAdapter.OnItemClickListener {
     RecyclerView recyclerView;
     DishAdapter dishAdapter;
     ArrayList<Dish> dishesList;
     RequestQueue requestQueue;
-    int categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dishes);
+        setContentView(R.layout.activity_suggestions);
         recyclerView = findViewById(R.id.recyclerViewDishes);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         dishesList = new ArrayList<>();
         requestQueue = Volley.newRequestQueue(this);
-
-        Intent intent;
-
-        intent = getIntent();
-        categoryId = intent.getIntExtra("categoryId", 0);
         fillRecyclerViewDishes();
     }
 
     private void fillRecyclerViewDishes() {
-        String urlBase = "https://www.vmartinez1984.somee.com";
-        String uri = "/Api/Dishes/Category/" + categoryId;
+        String uri = "/Api/Dishes/Category/6" ;
         JsonArrayRequest jsonArrayRequest;
 
         jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                urlBase + uri,
+                Url.Base + uri,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -71,13 +60,13 @@ public class DishesActivity extends AppCompatActivity implements DishAdapter.OnI
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("name"),
                                         jsonObject.getString("description"),
-                                        urlBase + jsonObject.getString("imagePath"),
+                                        Url.Base + jsonObject.getString("imagePath"),
                                         jsonObject.getInt("price")
                                 ));
                             }
-                            dishAdapter = new DishAdapter(DishesActivity.this, dishesList);
+                            dishAdapter = new DishAdapter(SuggestionsActivity.this, dishesList);
                             recyclerView.setAdapter(dishAdapter);
-                            dishAdapter.setOnItemClickListener(DishesActivity.this);
+                            dishAdapter.setOnItemClickListener(SuggestionsActivity.this);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (Exception exception) {
@@ -99,8 +88,7 @@ public class DishesActivity extends AppCompatActivity implements DishAdapter.OnI
         Dish dish;
 
         dish = dishesList.get(position);
-        Intent intent = new Intent(DishesActivity.this, AddDishActivity.class);
-        intent.putExtra("Id", dish.getId());
+        Intent intent = new Intent(SuggestionsActivity.this, AddDishActivity.class);
         intent.putExtra("Imagen", dish.getImagePath());
         intent.putExtra("Nombre", dish.getName());
         intent.putExtra("Precio", dish.getPrice()+"");

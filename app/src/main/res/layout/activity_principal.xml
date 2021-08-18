@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
-            android:onClick="setBtnMenu_onClick"
+            android:onClick="setBtnSugeridos_onClick"
             android:text="sugeridos" />
 
         <Button

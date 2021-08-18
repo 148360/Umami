@@ -26,18 +26,18 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    //public void setBtnSugeridos_onClick(View view) {
-      //  Intent intent = new Intent(PrincipalActivity.this, MainActivity.class);
-       // startActivity(intent);
+    public void setBtnSugeridos_onClick(View view) {
+        Intent intent = new Intent(PrincipalActivity.this, SuggestionsActivity.class);
+        startActivity(intent);
+    }
 
     public void setBtnMenu_onClick(View view) {
         Intent intent = new Intent(PrincipalActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void setBtnSucursales_onClick(View view){
-        Intent intent = new Intent(PrincipalActivity.this,SucursalActivity.class);
+    public void setBtnSucursales_onClick(View view) {
+        Intent intent = new Intent(PrincipalActivity.this, SucursalActivity.class);
         startActivity(intent);
-                    }
-
+    }
 }
