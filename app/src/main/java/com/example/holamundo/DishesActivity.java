@@ -100,7 +100,7 @@ public class DishesActivity extends AppCompatActivity implements DishAdapter.OnI
 
         dish = dishesList.get(position);
         Intent intent = new Intent(DishesActivity.this, AddDishActivity.class);
-        intent.putExtra("Id", dish.getId());
+        intent.putExtra("Id", dish.getId()+"");
         intent.putExtra("Imagen", dish.getImagePath());
         intent.putExtra("Nombre", dish.getName());
         intent.putExtra("Precio", dish.getPrice()+"");

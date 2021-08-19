@@ -89,6 +89,7 @@ public class SuggestionsActivity extends AppCompatActivity implements DishAdapte
 
         dish = dishesList.get(position);
         Intent intent = new Intent(SuggestionsActivity.this, AddDishActivity.class);
+        intent.putExtra("Id", dish.getId()+"");
         intent.putExtra("Imagen", dish.getImagePath());
         intent.putExtra("Nombre", dish.getName());
         intent.putExtra("Precio", dish.getPrice()+"");

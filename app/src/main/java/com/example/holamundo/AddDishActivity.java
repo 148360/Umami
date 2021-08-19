@@ -43,7 +43,7 @@ public class AddDishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_dish);
         //acciones, procesos, intentos
         Intent intent = getIntent();
-        dishId = intent.getIntExtra("Id", 0);
+        dishId = Integer.parseInt(intent.getStringExtra("Id"));
         urlBase = intent.getStringExtra("Imagen");
         nombre = intent.getStringExtra("Nombre");
         precio = intent.getStringExtra("Precio");
