@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HolaMundo">
         <activity
+            android:name=".CartActivity"
+            android:exported="true" />
+        <activity
             android:name=".SuggestionsActivity"
             android:exported="true" />
         <activity android:name=".SucursalActivity" />

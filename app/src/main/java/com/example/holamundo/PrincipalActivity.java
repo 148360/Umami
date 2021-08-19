@@ -7,8 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.security.Principal;
-
 public class PrincipalActivity extends AppCompatActivity {
 
     Button btnSugeridos, btnMenu, btnHome, btnSucursales;
@@ -21,7 +19,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         btnSugeridos = (Button) findViewById(R.id.btnSugeridos);
         btnMenu = (Button) findViewById(R.id.btnMenu);
-        btnHome = (Button) findViewById(R.id.btnHome);
+        btnHome = (Button) findViewById(R.id.btnGoToCart);
         btnSucursales = (Button) findViewById(R.id.btnSucursales);
 
     }
@@ -38,6 +36,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public void setBtnSucursales_onClick(View view) {
         Intent intent = new Intent(PrincipalActivity.this, SucursalActivity.class);
+        startActivity(intent);
+    }
+
+    public void buttonGoToCart_onClick(View view){
+        Intent intent = new Intent(PrincipalActivity.this, CartActivity.class);
         startActivity(intent);
     }
 }

@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_add_dish.xml" value="0.3875" />
+        <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_cart.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_dishes.xml" value="0.3804347826086957" />
         <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_principal.xml" value="0.3875" />
+        <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_registro.xml" value="0.3875" />
         <entry key="..\:/Users/DACPTICS_Desarrollo/StudioProjects/Umami/app/src/main/res/layout/activity_suggestions.xml" value="0.3804347826086957" />
       </map>
     </option>

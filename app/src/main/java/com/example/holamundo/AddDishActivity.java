@@ -2,9 +2,13 @@ package com.example.holamundo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.holamundo.models.AdminSQLiteOpenHelper;
 import com.example.holamundo.models.Url;
 import com.squareup.picasso.Picasso;
 
@@ -33,9 +38,11 @@ public class AddDishActivity extends AppCompatActivity {
     int dishId;
     int orderId;
     int clientId;
-    String urlBase = "https://www.vmartinez1984.somee.com/";
+    String urlBase;
     RequestQueue requestQueue;
     JsonObjectRequest jsonObjectRequest;
+    Button buttonAddDish;
+    Button buttonGoCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class AddDishActivity extends AppCompatActivity {
         TextView textViewCreator = findViewById(R.id.text_view_name);
         TextView textViewPrice = findViewById(R.id.text_view_price);
         TextView textViewDescription = findViewById(R.id.text_view_description);
+        buttonAddDish = findViewById(R.id.btnAddDish);
+        buttonGoCart = findViewById(R.id.btnGoCart);
 
         //Integra los componentes de datos con valorew de json
         Picasso.get().load(urlBase).fit().centerInside().into(imageView);
@@ -63,6 +72,8 @@ public class AddDishActivity extends AppCompatActivity {
     }
 
     public void buttonAgregarPlatillo_onClick(View view) {
+        buttonGoCart.setEnabled(false);
+        buttonAddDish.setEnabled(false);
         //Revisar si ya esta la ordenId
         orderId = getOrderIdFromSqlite();
         if (orderId == 0) {
@@ -98,15 +109,22 @@ public class AddDishActivity extends AppCompatActivity {
                             setOrderIdInSqlite(orderId);
                             ///progressDialog.dismiss();
                             //Registramos el platillo
+                            buttonGoCart.setEnabled(false);
+                            buttonAddDish.setEnabled(false);
                             registrarPlatillo();
+                            Toast.makeText(getApplicationContext(), nombre + " agregado", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        buttonGoCart.setEnabled(true);
+                        buttonAddDish.setEnabled(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        buttonGoCart.setEnabled(true);
+                        buttonAddDish.setEnabled(true);
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -135,12 +153,16 @@ public class AddDishActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         ///progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Platillo Registrado ", Toast.LENGTH_LONG).show();
+                        buttonGoCart.setEnabled(true);
+                        buttonAddDish.setEnabled(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        buttonGoCart.setEnabled(true);
+                        buttonAddDish.setEnabled(true);
                     }
                 }
         );
@@ -149,14 +171,58 @@ public class AddDishActivity extends AppCompatActivity {
     }
 
     public int getOrderIdFromSqlite(){
-        return 0;
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
+        SQLiteDatabase bd = admin.getReadableDatabase();
+        int orderId;
+
+        // Se genera un cursor para busqueda de un campo distintivo en tabla
+        Cursor fila = bd.rawQuery("SELECT orderId from usuarios", null);
+
+        if (fila.moveToFirst()) {//condicion verdadera si encontro un registro que lo imprima
+            orderId =  fila.getInt(0);
+        } else {//condicion falsa si no encontro registro
+            orderId = 0;
+            Toast.makeText(this, "No hay orden registrada", Toast.LENGTH_LONG).show();
+            bd.close();
+        }
+
+        return orderId;
     }
 
     private int getClientIdOfFromSqlite(){
-        return 13;
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
+        SQLiteDatabase bd = admin.getReadableDatabase();
+        int clientId;
+
+        // Se genera un cursor para busqueda de un campo distintivo en tabla
+        Cursor fila = bd.rawQuery("SELECT id from usuarios", null);
+
+        if (fila.moveToFirst()) {//condicion verdadera si encontro un registro que lo imprima
+           clientId =  fila.getInt(0);
+        } else {//condicion falsa si no encontro registro
+            clientId = 0;
+            Toast.makeText(this, "No hay cliente registrado", Toast.LENGTH_LONG).show();
+            bd.close();
+        }
+
+        return clientId;
     }
 
     private void setOrderIdInSqlite(int orderId){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
+        SQLiteDatabase database = admin.getWritableDatabase();
+        ContentValues contentValues;
+        contentValues = new ContentValues();
+        contentValues.put("orderId",orderId);
+        database.update("usuarios",contentValues,null,null);
+        database.close();
+    }
 
+    public void buttonGoCart_onClick(View view){
+        Intent intent;
+
+        intent = new Intent(AddDishActivity.this, CartActivity.class);
+
+        startActivity(intent);
     }
 }

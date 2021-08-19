@@ -30,15 +30,11 @@ import org.json.JSONObject;
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText editTextNombre, editTextapellido, editTextemail, editTextcelTel, editTextdireccion, editTextreferencia;
-
     Button btnAviso, btnRegistrate;
-
     RequestQueue requestQueue;
     JsonObjectRequest jsonObjectRequest;
 
-
     @Override
-
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_registro);
@@ -51,21 +47,15 @@ public class RegistroActivity extends AppCompatActivity {
             Toast.makeText(this, "Bienvenido: \n" + nombreCompleto, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Registre el usuario", Toast.LENGTH_LONG).show();
-
             btnAviso = (Button) findViewById(R.id.btnAviso);
             btnRegistrate = (Button) findViewById(R.id.btnRegistrate);
-
-
             editTextNombre = findViewById(R.id.editTextName);
             editTextapellido = findViewById(R.id.editTextsurname);
             editTextemail = findViewById(R.id.editTextemail);
             editTextcelTel = findViewById(R.id.editTextcelPhone);
             editTextdireccion = findViewById(R.id.editTextaddress);
             editTextreferencia = findViewById(R.id.editTextreference);
-
-
             ////programacion para abrir activity aviso
-
             btnAviso.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {//inicia metodo
@@ -122,8 +112,6 @@ public class RegistroActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
     public void registrarUsuarioEnBasedeSQLite(int id, String name, String surname, String email, String celPhone, String address, String reference) {
 
         //toda la logica del insert
@@ -165,7 +153,6 @@ public class RegistroActivity extends AppCompatActivity {
 
         }
     }
-
 
     public String getNombreCompleto() {//para poder dar la bienvenida
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
@@ -290,11 +277,6 @@ public class RegistroActivity extends AppCompatActivity {
         );
 
         requestQueue.add(jsonObjectRequest);
-
-        Toast.makeText(this, "Datos Registrados", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(RegistroActivity.this, PrincipalActivity.class);
-        startActivity(intent);
-
     }
 
 

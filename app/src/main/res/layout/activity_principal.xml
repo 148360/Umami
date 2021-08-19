@@ -24,10 +24,11 @@
             android:text="Menu" />
 
         <Button
-            android:id="@+id/btnHome"
+            android:id="@+id/btnGoToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Home" />
+            android:onClick="buttonGoToCart_onClick"
+            android:text="Carrito" />
 
         <Button
             android:id="@+id/btnSucursales"

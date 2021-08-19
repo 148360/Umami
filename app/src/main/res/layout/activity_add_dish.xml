@@ -43,10 +43,16 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnAgregar"
+        android:id="@+id/btnAddDish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="buttonAgregarPlatillo_onClick"
         android:text="agregar" />
 
+    <Button
+        android:id="@+id/btnGoCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buttonGoCart_onClick"
+        android:text="ver carrito" />
 </LinearLayout>
