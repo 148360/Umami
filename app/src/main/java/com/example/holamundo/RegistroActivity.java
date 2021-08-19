@@ -1,9 +1,13 @@
 package com.example.holamundo;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.holamundo.models.AdminSQLiteOpenHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,17 +35,23 @@ public class RegistroActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
     JsonObjectRequest jsonObjectRequest;
-    ProgressDialog progressDialog;
+
 
     @Override
 
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_registro);
-        if(estaRegistradoElUsuario()) {
+        if (estaRegistradoElUsuario()) {
+
             enviarALaPrinciaplActivity();
+            String nombreCompleto;
             //Mostrar el toast de bienvenido con el nombre
-        }else {
+            nombreCompleto = getNombreCompleto();
+            Toast.makeText(this, "Bienvenido: \n" + nombreCompleto, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Registre el usuario", Toast.LENGTH_LONG).show();
+
             btnAviso = (Button) findViewById(R.id.btnAviso);
             btnRegistrate = (Button) findViewById(R.id.btnRegistrate);
 
@@ -103,23 +114,84 @@ public class RegistroActivity extends AppCompatActivity {
         }
     }
 
-    public void enviarALaPrinciaplActivity(){
+    public void enviarALaPrinciaplActivity() {
         Intent intent;
 
         intent = new Intent(RegistroActivity.this, PrincipalActivity.class);
 
         startActivity(intent);
     }
-    public boolean estaRegistradoElUsuario(){
-        return true;
+
+
+
+    public void registrarUsuarioEnBasedeSQLite(int id, String name, String surname, String email, String celPhone, String address, String reference) {
+
+        //toda la logica del insert
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
+        SQLiteDatabase bd = admin.getReadableDatabase();
+        //se crea contenedor para almacenar los valores
+        ContentValues registro = new ContentValues();
+        //se integran variables de java con valores y campos de la tabla usuarios
+        registro.put("id", id);
+        registro.put("name", name);
+        registro.put("surname", surname);
+        registro.put("email", email);
+        registro.put("celPhone", celPhone);
+        registro.put("address", address);
+        registro.put("reference", reference);
+        //se inserta registro en tabla usuarios
+        bd.insert("usuarios", null, registro);
+        //se cierra BD
+        bd.close();
     }
 
-    public void btnRegistrar_onClick(View view) {
-        if (verificarCampos()) {
-            registrarUsuario();
-        }
-        /// Descargar los datos para poder enviarlos
+    public boolean estaRegistradoElUsuario() {
+        try {
+            //Select de la base de datos, si esta vacio regresas false
+            //si esta lleno regresas true
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
+            SQLiteDatabase bd = admin.getReadableDatabase();
+            //Se genera un cursor para busqueda de un campo distintivo en tabla
+            Cursor fila = bd.rawQuery("SELECT * from usuarios", null);
 
+            if (fila.moveToFirst()) {//condicion verdadera si encontro un registro que lo imprima
+                return true;
+            } else {//condicion falsa si no encontro registro
+                return false;
+            }
+        } catch (Exception exception) {
+            Log.d("TAG", "estaRegistradoElUsuario: ");
+            return false;
+
+        }
+    }
+
+
+    public String getNombreCompleto() {//para poder dar la bienvenida
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "registros", null, 1);
+        SQLiteDatabase bd = admin.getReadableDatabase();
+        String name;
+        String surname;
+        // Se genera un cursor para busqueda de un campo distintivo en tabla
+        Cursor fila = bd.rawQuery("SELECT * from usuarios", null);
+
+        if (fila.moveToFirst()) {//condicion verdadera si encontro un registro que lo imprima
+            fila.getInt(0);
+            name = fila.getString(1);
+            surname = fila.getString(2);
+        } else {//condicion falsa si no encontro registro
+            name = "";
+            surname = "";
+            Toast.makeText(this, "No existe ", Toast.LENGTH_LONG).show();
+            bd.close();
+        }
+        return name + " " + surname;
+    }
+
+    public void btnRegistrarUsuario_onClick(View view) {
+        if (verificarCampos()) {
+            enviarDatosDeUsuarioAlServidor();
+        }
     }
 
     public boolean verificarCampos() {
@@ -131,18 +203,33 @@ public class RegistroActivity extends AppCompatActivity {
             Toast.makeText(this, "Anote un apellido valido", Toast.LENGTH_LONG).show();
             return false;
         }
+
+        if (editTextemail.getText().toString().length() == 0) {
+            Toast.makeText(this, "Anote un correo electronico valido", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+        if (editTextcelTel.getText().toString().length() == 0) {
+            Toast.makeText(this, "Anote un numero telefonico valido", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+
+        if (editTextdireccion.getText().toString().length() == 0) {
+            Toast.makeText(this, "Anote una direccion valida", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (editTextreferencia.getText().toString().length() == 0) {
+            Toast.makeText(this, "Anote un referencia valida", Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
+
     }
 
-    public void enviarPrincipal() {
-
-
-        Toast.makeText(this, "Datos Registrados", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(RegistroActivity.this, PrincipalActivity.class);
-        startActivity(intent);
-    }
-
-    public void registrarUsuario() {
+    public void enviarDatosDeUsuarioAlServidor() {
 
         String url = "https://www.vmartinez1984.somee.com/Api/Clients";
 
@@ -184,16 +271,10 @@ public class RegistroActivity extends AppCompatActivity {
                             int usuarioId;
 
                             usuarioId = response.getInt("id");
-
-                            ///progressDialog.dismiss();
-
-
+                            //Registrar datos de usuario y id que nos devolvio el servidor, en la base de datosSQLite
+                            registrarUsuarioEnBasedeSQLite(usuarioId,Nombre,Apellido,Email,CelTel,Direccion,Referencia);
                             Toast.makeText(getApplicationContext(), "Usuario Registrado " + usuarioId, Toast.LENGTH_LONG).show();
-
-                            //Registrar en la base sqlite
-                            //registrarUsuarioEnlaBaseSqlite(usuarioId,Nombre,Apellido);
-
-
+                            enviarALaPrinciaplActivity();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -202,8 +283,8 @@ public class RegistroActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       btnRegistrate.setEnabled(true);
-                       Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        btnRegistrate.setEnabled(true);
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
         );
