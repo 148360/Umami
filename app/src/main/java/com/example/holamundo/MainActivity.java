@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.holamundo.adapters.CategoryAdapter;
+import com.example.holamundo.models.AdminSQLiteOpenHelper;
 import com.example.holamundo.models.Category;
 
 import org.json.JSONArray;
@@ -92,4 +96,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.O
         //detailIntent.putExtra(EXTRA_LIKES,clickedItem.getId());
         startActivity(intent);
     }//termina metodo
+
+
+
+
 }
