@@ -10,28 +10,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/buttonSendOrder">
 
-            <RadioButton
-                android:id="@+id/radioButtonPagoEnEfectivo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pago en efectivo" />
-
-            <RadioButton
-                android:id="@+id/radioButtonPagoConTarjeta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pago con tarjeta" />
-        </RadioGroup>
-        <Button
-            android:id="@+id/buttonSendOrder"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="buttonSendOrder_onClick"
-            android:text="Enviar orden" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reciclerViewDishesFromCart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTotalAPagar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/buttonSendOrder">
+
+                <RadioButton
+                    android:id="@+id/radioButtonPagoEnEfectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pago en efectivo" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonPagoConTarjeta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pago con tarjeta" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/buttonSendOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="buttonSendOrder_onClick"
+                android:text="Enviar orden" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

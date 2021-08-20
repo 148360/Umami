@@ -1,6 +1,8 @@
 package com.example.holamundo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -10,26 +12,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.holamundo.adapters.DishAdapter;
 import com.example.holamundo.models.AdminSQLiteOpenHelper;
+import com.example.holamundo.models.Dish;
 import com.example.holamundo.models.Url;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CartActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CartActivity extends AppCompatActivity implements DishAdapter.OnItemClickListener {
     RequestQueue requestQueue;
     JsonObjectRequest jsonObjectRequest;
     Button buttonSendOrder;
     RadioButton radioButtonPagoEnEfectivo;
     RadioButton radioButtonPagoConTarjeta;
+    RecyclerView recyclerViewDishes;
+    DishAdapter dishAdapter;
+    ArrayList<Dish> dishesList;
+    int totalAPagar;
+    TextView textViewTotalAPagar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,78 @@ public class CartActivity extends AppCompatActivity {
         buttonSendOrder = findViewById(R.id.buttonSendOrder);
         radioButtonPagoConTarjeta = findViewById(R.id.radioButtonPagoConTarjeta);
         radioButtonPagoEnEfectivo = findViewById(R.id.radioButtonPagoEnEfectivo);
+        textViewTotalAPagar = findViewById(R.id.textViewTotalAPagar);
+        recyclerViewDishes = findViewById(R.id.reciclerViewDishesFromCart);
+        recyclerViewDishes.setHasFixedSize(true);
+        recyclerViewDishes.setLayoutManager(new LinearLayoutManager(this));
+        dishesList = new ArrayList<>();
+        totalAPagar =0;
+
+        fillRecyclerViewDishes();
+    }
+
+    private void fillRecyclerViewDishes() {
+        JsonArrayRequest jsonArrayRequest;
+        String uri;
+        int orderId;
+
+        orderId = getOrderIdFromSqlite();
+        uri = "/Api/OrderDetails/Order/" + orderId;
+        Toast.makeText(this, "Orden número: "+orderId, Toast.LENGTH_SHORT).show();
+        requestQueue = Volley.newRequestQueue(this);
+        jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                Url.Base + uri,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+                        try {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject;
+                                jsonObject = jsonArray.getJSONObject(i);
+                                dishesList.add(new Dish(
+                                        jsonObject.getInt("orderDetailId"),
+                                        jsonObject.getString("name"),
+                                        "",
+                                        Url.Base + jsonObject.getString("imagePath"),
+                                        jsonObject.getInt("price")
+                                ));
+                                totalAPagar += jsonObject.getInt("price");
+                            }
+                            textViewTotalAPagar.setText("Total a pagar: $"+totalAPagar);
+                            dishAdapter = new DishAdapter(CartActivity.this, dishesList);
+                            recyclerViewDishes.setAdapter(dishAdapter);
+                            dishAdapter.setOnItemClickListener(CartActivity.this);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }
+        );
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        /*Dish dish;
+
+        dish = dishesList.get(position);
+        Intent intent = new Intent(CartActivity.this, AddDishActivity.class);
+        intent.putExtra("Id", dish.getId()+"");
+        intent.putExtra("Imagen", dish.getImagePath());
+        intent.putExtra("Nombre", dish.getName());
+        intent.putExtra("Precio", dish.getPrice()+"");
+        intent.putExtra("Descripcion", dish.getDescription());
+        startActivity(intent);
+        */
     }
 
     public void buttonSendOrder_onClick(View view) {
