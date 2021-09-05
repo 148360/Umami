@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#333333">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="Umami"
-            android:textSize="25sp"
+            android:textColor="#ED087A"
+            android:textSize="45sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:hint="nombre"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#CEDCD6"
+            android:textColorHint="#B4B4B4" />
 
         <EditText
             android:id="@+id/editTextsurname"
@@ -34,31 +47,39 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="apellido"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#CEDCD6"
+            android:textColorHint="#B4B4B4" />
 
         <EditText
             android:id="@+id/editTextemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="email"
-            android:inputType="textPersonName" />
+            android:hint="e-mail"
+            android:inputType="textPersonName"
+            android:textColor="#CEDCD6"
+            android:textColorHint="#B4B4B4" />
 
         <EditText
             android:id="@+id/editTextcelPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="telCel"
-            android:inputType="textPersonName" />
+            android:hint="TelCelular"
+            android:inputType="textPersonName"
+            android:textColor="#CEDCD6"
+            android:textColorHint="#B4B4B4" />
 
         <EditText
             android:id="@+id/editTextaddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="direccion"
-            android:inputType="textPersonName" />
+            android:hint="dirección"
+            android:inputType="textPersonName"
+            android:textColor="#CEDCD6"
+            android:textColorHint="#B4B4B4" />
 
         <EditText
             android:id="@+id/editTextreference"
@@ -66,22 +87,31 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="referencia"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#CEDCD6"
+            android:textColorHint="#B4B4B4" />
 
         <Button
             android:id="@+id/btnAviso"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#3D3D3D"
             android:gravity="center"
-            android:text="aviso de privacidad" />
+            android:text="aviso de privacidad"
+            android:textColor="#FAFAFA" />
 
         <Button
             android:id="@+id/btnRegistrate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#3D3D3D"
+            android:gravity="center"
             android:onClick="btnRegistrarUsuario_onClick"
-            android:text="registrate" />
+            android:text="registrate"
+            android:textColor="#FAFAFA" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

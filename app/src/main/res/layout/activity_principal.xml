@@ -1,40 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#333333"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Umami"
+            android:textColor="#ED087A"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <VideoView
+            android:id="@+id/vVPrueba"
+            android:layout_width="wrap_content"
+            android:layout_height="238dp"
+            android:layout_marginTop="60dp" />
 
         <Button
             android:id="@+id/btnSugeridos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#3D3D3D"
             android:onClick="setBtnSugeridos_onClick"
-            android:text="sugeridos" />
+            android:text="sugeridos"
+            android:textColor="#B4B4B4" />
 
         <Button
             android:id="@+id/btnMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#3D3D3D"
             android:onClick="setBtnMenu_onClick"
-            android:text="Menu" />
+            android:text="Menu"
+            android:textColor="#B4B4B4" />
 
         <Button
             android:id="@+id/btnGoToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#3D3D3D"
             android:onClick="buttonGoToCart_onClick"
-            android:text="Carrito" />
+            android:text="Carrito"
+            android:textColor="#B4B4B4" />
 
         <Button
             android:id="@+id/btnSucursales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#3D3D3D"
             android:onClick="setBtnSucursales_onClick"
-            android:text="Sucursal" />
+            android:text="Sucursal"
+            android:textColor="#B4B4B4" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

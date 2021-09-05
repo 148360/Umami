@@ -12,37 +12,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#3D3D3D"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="8dp"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Id" />
+
             <TextView
                 android:id="@+id/textViewName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre" />
+                android:text="Nombre"
+                android:textColor="#FAFAFA" />
 
             <TextView
                 android:id="@+id/textViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descripción" />
+                android:text="Descripción"
+                android:textColor="#B4B4B4" />
 
             <TextView
                 android:id="@+id/textViewPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Precio" />
+                android:text="Precio"
+                android:textColor="#ED087A" />
 
         </LinearLayout>
 

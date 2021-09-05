@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     tools:context=".SucursalActivity">
 
     <LinearLayout
@@ -13,6 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:background="#333333"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +28,8 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="Sucursal"
-            android:textSize="25sp"
+            android:textColor="#333333"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -41,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Umami Roma"
+            android:textColor="#FAFAFA"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -48,18 +52,21 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Colima 159, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX" />
+            android:text="Colima 159, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX"
+            android:textColor="#B4B4B4" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tel. 5524620104" />
+            android:text="Tel. 5524620104"
+            android:textColor="#B4B4B4" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Horario: 13:00 -23:30" />
+            android:text="Horario: 13:00 -23:30"
+            android:textColor="#B4B4B4" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

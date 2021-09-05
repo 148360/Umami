@@ -1,15 +1,21 @@
 package com.example.holamundo;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+///public class PrincipalActivity extends AppCompatActivity {
 public class PrincipalActivity extends AppCompatActivity {
 
     Button btnSugeridos, btnMenu, btnHome, btnSucursales;
+
+    VideoView videoPrueba;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -21,6 +27,21 @@ public class PrincipalActivity extends AppCompatActivity {
         btnMenu = (Button) findViewById(R.id.btnMenu);
         btnHome = (Button) findViewById(R.id.btnGoToCart);
         btnSucursales = (Button) findViewById(R.id.btnSucursales);
+
+        videoPrueba = (VideoView) findViewById(R.id.vVPrueba);
+
+
+        //Prueba de compilacion y ejecucion de video
+
+        Uri path = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sushi);
+        MediaController mc = new MediaController(this);
+        videoPrueba.setMediaController(mc);
+        videoPrueba.setVideoURI(path);
+        videoPrueba.setMediaController(new MediaController(this));
+        videoPrueba.start();
+
+
+
 
     }
 
@@ -43,4 +64,6 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = new Intent(PrincipalActivity.this, CartActivity.class);
         startActivity(intent);
     }
+
+
 }

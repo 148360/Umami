@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#333333"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -55,10 +56,14 @@
 
             <Button
                 android:id="@+id/buttonSendOrder"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#3D3D3D"
+                android:gravity="center"
                 android:onClick="buttonSendOrder_onClick"
-                android:text="Enviar orden" />
+                android:text="Enviar orden"
+                android:textColor="#FAFAFA" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

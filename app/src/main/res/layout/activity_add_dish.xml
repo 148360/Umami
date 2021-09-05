@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     android:orientation="vertical"
     tools:context=".AddDishActivity">
 
@@ -11,8 +12,7 @@
         android:id="@+id/image_view_detail"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@mipmap/ic_launcher"
-        />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/text_view_name"
@@ -21,8 +21,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
+        android:shadowColor="#FAFAFA"
         android:text="Nombre del Platillo"
-        android:textColor="@android:color/black"
+        android:textColor="#FAFAFA"
         android:textSize="40sp" />
 
     <TextView
@@ -32,27 +33,40 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Precio: $"
+        android:textColor="#ED087A"
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/text_view_description"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Descripcion"
+        android:textColor="#B4B4B4"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnAddDish"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#3D3D3D"
         android:onClick="buttonAgregarPlatillo_onClick"
-        android:text="agregar" />
+        android:text="agregar"
+        android:textColor="#FAFAFA" />
 
     <Button
         android:id="@+id/btnGoCart"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#3D3D3D"
+        android:gravity="center"
         android:onClick="buttonGoCart_onClick"
-        android:text="ver carrito" />
+        android:text="ver carrito"
+        android:textColor="#FAFAFA" />
 </LinearLayout>
